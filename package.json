@@ -1,0 +1,12 @@
+{
+  "name": "movie_list_rails",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "babel-standalone": "^6.26.0",
+    "datatables.mark.js": "github:julmot/datatables.mark.js",
+    "datatables.net": "^1.10.19",
+    "datatables.net-bs4": "^1.10.19",
+    "mark.js": "github:julmot/mark.js"
+  }
+}

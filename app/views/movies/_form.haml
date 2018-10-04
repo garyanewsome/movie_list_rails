@@ -1,0 +1,43 @@
+.container
+  .row
+    .col-sm-12.col-md-6
+      .row
+        %h5.card-title Search Open Movie Database for your film
+      = form_with(url: get_details_movies_path, local: true) do |form|
+        .row
+          .form-group
+            = form.label :title
+            = form.text_field :title, class: 'form-control'
+        .row
+          .actions
+            = form.submit 'Search', class: 'btn btn-primary'
+
+    .col-sm-12.col-md-6
+      .row
+        %h5 Or enter the details yourself
+      = form_with(model: movie, local: true) do |form|
+        .row
+          .form-group
+            = form.label :title
+            = form.text_field :title, class: 'form-control'
+        .row
+          .form-group
+            = form.label :year
+            = form.text_field :year, class: 'form-control'
+        .row
+          .form-group
+            = form.label :poster_url
+            = form.text_field :poster_url, class: 'form-control'
+        .row
+          .form-group
+            = form.label :genre
+            = form.text_field :genre, class: 'form-control'
+        .row
+          .form-group
+            = form.label :rating
+            = form.select :rating, [1, 2, 3, 4, 5], class: 'custom-select'
+        .row
+          .form-group
+            = collection_select(:movie_list, :id, MovieList.all, :id, :title, {prompt: 'Please select a list to add the movie to'}, class: 'custom-select')
+        .row.actions
+          = form.submit 'Save Movie', class: 'btn btn-primary'

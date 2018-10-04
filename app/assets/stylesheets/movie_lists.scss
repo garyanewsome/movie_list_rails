@@ -1,0 +1,18 @@
+.movie_lists {
+  .movie-rating-td {
+    max-height: 32px;
+  }
+}
+
+td.details-control-no-event {
+  width: 40px;
+  background: url('no_reel.svg') no-repeat center center;
+}
+td.details-control {
+  width: 40px;
+  background: url('reel.svg') no-repeat center center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background: url('reel.svg') no-repeat center center;
+}

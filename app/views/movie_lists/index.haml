@@ -1,0 +1,83 @@
+#notice= notice
+.movie-list
+  = link_to 'New Movie List', new_movie_list_path
+  %table#dt-movie-lists.display.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th
+        %th Title
+        %th Description
+        %th Movies
+        %th Actions
+    %tbody
+      - @movie_lists.each do |movie_list|
+        %tr.movie-list-row{id: "#{movie_list.id}-row"}
+          - if movie_list.movies.count > 0
+            %td.details-control
+          - else
+            %td.details-control-no-event
+          %td= movie_list.title
+          %td= movie_list.description
+          %td= movie_list.movies.count.positive? ? movie_list.movies.count : 0
+          %td
+            = link_to 'Show', movie_list_path(movie_list)
+            = link_to 'Edit', edit_movie_list_path(movie_list)
+            = link_to 'Destroy', movie_list, method: :delete, data: { confirm: 'Are you sure?' }
+
+  .inner-tables{style: "display: none;"}
+    - @movie_lists.each do |list|
+      - if(list.movies.count > 0)
+        %div{class: "#{list.id}-row"}
+          %p Movies in this list
+          %table.inner-tables-table
+            %thead
+              %tr
+                %th Title
+                %th Year
+                %th Genre
+                %th Poster
+                %th Rating
+                %th Movie List
+            %tbody
+              - list.movies.each do |movie|
+                %tr
+                  %td= link_to movie.title, movie_path(movie)
+                  
+                  - if movie.year.present?
+                    %td= movie.year
+                  -else
+                    %td
+                  
+                  -if movie.genre.present?
+                    %td= movie.genre
+                  - else
+                    %td
+                  
+                  -if movie.poster_url.present?
+                    %td= link_to 'Poster', movie.poster_url, target: '_blank'
+                  -else
+                    %td
+                  
+                  -if movie.rating.present?
+                    %td.movie-rating-td{'data-rating': movie.rating}
+                  -else
+                    %td.movie-rating-td
+
+                  -if movie.movie_lists.last.nil?
+                    %td 
+                  - else
+                    %td= link_to movie.movie_lists.last.title, movie_lists_path(movie.movie_lists.last)
+
+:javascript      
+  var ratings = document.querySelectorAll('.movie-rating-td')
+  for(var i = 0; i < ratings.length; i++) {
+    var image = ''
+    for(var ii = 1; ii <= 5; ii++) {
+      if(ratings[i].dataset.rating >= ii) {
+        image += '<span><img src="assets/star.svg" /></span>'
+      } else {
+        image += '<span><img src="assets/no_star.svg" /></span>'
+      }
+    }
+    ratings[i].innerHTML =image
+  }

@@ -1,0 +1,15 @@
+.header
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    =link_to 'Movie List Code Challenge', root_path, class: 'navbar-brand'
+    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      %ul.navbar-nav
+        %li.nav-item
+          %a.nav-link{href: movie_lists_path}
+            Movie Lists
+            %span.sr-only (current)
+        %li.nav-item
+          %a.nav-link{href: movies_path} Movies
+
+

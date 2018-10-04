@@ -1,0 +1,8 @@
+.movie_list
+  .card
+    .card-header
+      %h4 New Movie List
+    .card-body
+      = render 'form', movie_list: @movie_list
+
+= link_to 'Back', movie_lists_path

@@ -1,0 +1,23 @@
+@import "bootstrap";
+@import "datatables.net-bs4/css/dataTables.bootstrap4.min.css";
+@import "datatables.mark.js/dist/datatables.mark.min.css";
+
+@import "header.scss";
+@import "movie_lists.scss";
+@import "movies.scss";
+
+body {
+  font-size: 1.1em;
+  line-height: 1.4em;
+}
+
+h1 { font-size: 2.0em; }
+h2 { font-size: 1.7411em; }
+h3 { font-size: 1.5157em; }
+h4 { font-size: 1.3195em; }
+h5 { font-size: 1.1487em; }
+h6 { font-size: 1.0em; }
+
+mark {
+  background: yellow;
+}

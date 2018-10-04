@@ -1,0 +1,65 @@
+#notice= notice
+.movies
+  = link_to 'New Movie', new_movie_path, class: 'float-right'
+  .row
+    .col-sm-12
+      %h1 Movies
+
+  .row
+    .col-sm-12
+      %table#dt-movie.display.table.table-bordered.table-striped
+        %thead
+          %tr
+            %th Title
+            %th Year
+            %th Genre
+            %th Poster
+            %th Rating
+            %th Movie List
+            %th Actions
+
+        %tbody
+          - @movies.each do |movie|
+            %tr
+              %td= link_to movie.title, movie_path(movie)
+              - if movie.year.present?
+                %td= movie.year
+              -else
+                %td
+              
+              -if movie.genre.present?
+                %td= movie.genre
+              - else
+                %td
+              
+              -if movie.poster_url.present?
+                %td= link_to 'Poster', movie.poster_url, target: '_blank'
+              -else
+                %td
+              
+              -if movie.rating.present?
+                %td.movie-rating-td{'data-rating': movie.rating}
+              -else
+                %td.movie-rating-td
+              -if movie.movie_lists.last.nil?
+                %td 
+              - else
+                %td= link_to movie.movie_lists.last.title, movie_lists_path(movie.movie_lists.last)
+              %td
+                = link_to 'Show', movie_path(movie)
+                = link_to 'Edit', edit_movie_path(movie)
+                = link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }
+
+:javascript      
+  var ratings = document.querySelectorAll('.movie-rating-td')
+  for(var i = 0; i < ratings.length; i++) {
+    var image = ''
+    for(var ii = 1; ii <= 5; ii++) {
+      if(ratings[i].dataset.rating >= ii) {
+        image += '<span><img src="assets/star.svg" /></span>'
+      } else {
+        image += '<span><img src="assets/no_star.svg" /></span>'
+      }
+    }
+    ratings[i].innerHTML =image
+  }

@@ -1,0 +1,10 @@
+.movie-list
+  .row
+    .col-sm-12
+      .card
+        .card-header
+          %h4 Add a New Movie
+        .card-body
+          = render 'form', movie: @movie
+
+= link_to 'Back', movies_path

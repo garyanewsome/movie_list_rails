@@ -1,0 +1,43 @@
+#notice= notice
+.card
+  .card-header
+    %h4= @movie.title
+  .card-body
+    .row
+      - if @movie.poster_url.present?
+        .col-sm-12.col-md-5
+          = image_tag(@movie.poster_url)
+      .col-sm-12.col-md-7
+        %p
+          %strong Year:
+          = @movie.year if @movie.year.present?
+
+        %p
+          %strong Genre:
+          = @movie.genre if @movie.genre.present?
+
+        %p
+          %strong Rating:
+          %span.movie-rating{'data-rating': @movie.rating}
+
+        %p
+          %strong Movie List:
+          = @movie.movie_lists.last.title if @movie.movie_lists.last.present?
+
+= link_to 'Back', movies_path
+|
+= link_to 'Edit', edit_movie_path(@movie)
+
+:javascript      
+  var rating = document.querySelector('.movie-rating')
+  if(rating != undefined){
+    var image = ''
+    for(var i = 1; i <= 5; i++) {
+      if(rating.dataset.rating >= i) {
+        image += '<span><img src="../assets/star.svg" /></span>'
+      } else {
+        image += '<span><img src="../assets/no_star.svg" /></span>'
+      }
+      rating.innerHTML =image
+    }
+  }
